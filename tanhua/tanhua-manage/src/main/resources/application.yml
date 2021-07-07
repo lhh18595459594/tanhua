@@ -1,0 +1,92 @@
+server:
+  port: 18083
+
+#配置redis
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tanhua_manager?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.237.160
+    port: 6379
+dubbo:
+  application:
+    name: tanhua-manage
+  registry:
+    address: zookeeper://192.168.237.160:2181
+  consumer:
+    check: false
+## ============ 探花配置 ====================
+tanhua:
+  # jwt密钥
+  secret: 76bd425b6f29f7fcc2e0bfc286043df1
+  # redis key prefix for validate code
+  redisValidateCodeKeyPrefix: VALIDATECODE_
+  sms:
+    signName: 黑马程序员
+    parameterName: code
+    validateCodeTemplateCode: SMS_164508533
+    accessKeyId: LTAI5t6WDa8qwYVziAJjq8kM
+    accessKeySecret: NG6kO5Xc0Hq5OVMo6CCaQryN3CEVLP
+  huanxin:
+    url: http://a31.easemob.com/
+    orgName: 1112210609148295
+    appName: tanhua
+    clientId: YXA6no_KksqFTs6w0maFbVPOrA
+    clientSecret: YXA6XL_rEfzFqLhewC-DiNw0sooLt2E
+  oss:
+    endpoint: http://oss-cn-shenzhen.aliyuncs.com
+    bucketName: lhh123
+    url: https://lhh123.oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAI5tMHJSDXb3BVFwRpK2eg
+    accessKeySecret: iq6bY22OuTsbSWCMNMiNMzmLIemgnl
+  face:
+    appId: 22949516
+    apiKey: uDkEBDhtO02soeMB6kuMZTZi
+    secretKey: sMGUX8tzPhc0eBfvy3rbGYuXiK6MZCEF
+  huawei:
+    username: lbj112233
+    password: lhh123456789
+    project: cn-east-3
+    domain: lhh65900208
+    # 图片检测内容 politics：是否涉及政治人物的检测，terrorism：是否包含涉政暴恐元素的检测，porn：是否包含涉黄内容元素的检测，ad：是否包含广告的检测（公测特性），all：包含politics、terrorism和porn三种场景的检测
+    categoriesImage: politics,terrorism,porn
+    # 文字检测内容 politics：涉政，porn：涉黄，ad：广告，abuse：辱骂，contraband：违禁品，flood：灌水
+    categoriesText: politics,porn,ad,abuse,contraband,flood
+    textApiUrl: https://moderation.cn-east-3.myhuaweicloud.com/v1.0/moderation/text
+    imageApiUrl: https://moderation.cn-east-3.myhuaweicloud.com/v1.0/moderation/image/batch
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 1500
+  connect-timeout: 600
+  #缩略图生成参数
+  thumb-image:
+    width: 150
+    height: 150
+  #TrackerList参数,支持多个
+  tracker-list: 192.168.237.160:22122
+  web-server-url: http://192.168.237.160:8888/
+#mybaits-plus
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tb_    #数据库表前缀
+      id-type: auto        #数据库表主键的策略
+# log
+logging:
+  level:
+    root: info
+    com:
+      tanhua: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %msg - %logger{15}%n\'
+
+#Rocketmq
+rocketmq:
+  name-server: 192.168.237.160:9876
+
+

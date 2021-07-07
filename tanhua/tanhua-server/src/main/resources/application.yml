@@ -1,0 +1,73 @@
+server:
+  port: 81
+dubbo:
+  application:
+    name: tanhua-server
+  registry:
+    address: zookeeper://192.168.237.160:2181
+  consumer:
+    check: false
+# log
+logging:
+  level:
+    root: info
+    com:
+      tanhua: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %msg - %logger{15}%n\'
+
+spring:
+  redis:
+    host: 192.168.237.160
+    port: 6379
+ #防止上传视频太大，限制发布视频的大小
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+## ============ 探花配置 ====================
+tanhua:
+  # jwt密钥
+  secret: 76bd425b6f29f7fcc2e0bfc286043df1
+  # redis key prefix for validate code
+  redisValidateCodeKeyPrefix: VALIDATECODE_
+  sms:
+    signName: 黑马程序员
+    parameterName: code
+    validateCodeTemplateCode: SMS_164508533
+    accessKeyId: LTAI5t6WDa8qwYVziAJjq8kM
+    accessKeySecret: NG6kO5Xc0Hq5OVMo6CCaQryN3CEVLP
+  huanxin:
+    url: http://a31.easemob.com/
+    orgName: 1112210609148295
+    appName: tanhua
+    clientId: YXA6no_KksqFTs6w0maFbVPOrA
+    clientSecret: YXA6XL_rEfzFqLhewC-DiNw0sooLt2E
+
+  #阿里云上传图片配置
+  oss:
+    endpoint: http://oss-cn-shenzhen.aliyuncs.com
+    bucketName: lhh123
+    url: https://lhh123.oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAI5tMHJSDXb3BVFwRpK2eg
+    accessKeySecret: iq6bY22OuTsbSWCMNMiNMzmLIemgnl
+
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 1500
+  connect-timeout: 600
+  #缩略图生成参数
+  thumb-image:
+    width: 150
+    height: 150
+  #TrackerList参数,支持多个
+  tracker-list: 192.168.237.160:22122
+  web-server-url: http://192.168.237.160:8888/
+
+rocketmq:
+  name-server: 192.168.237.160:9876
+  producer:
+    group: tanhua_log_producer
